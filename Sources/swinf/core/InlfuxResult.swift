@@ -8,14 +8,14 @@
 import Foundation
 
 // MARK: - InlfuxResult
-public struct InfluxResult: Codable {
-    let results: [Result]
+public struct InfluxResults: Codable {
+    let results: [InfluxResult]
 }
 
 // MARK: - Result
-public struct Result: Codable {
+public struct InfluxResult: Codable {
     let statementID: Int
-    let series: [Series]
+    let series: [InfluxSeries]
     
     enum CodingKeys: String, CodingKey {
         case statementID = "statement_id"
@@ -24,13 +24,13 @@ public struct Result: Codable {
 }
 
 // MARK: - Series
-public struct Series: Codable {
+public struct InfluxSeries: Codable {
     let name: String
     let columns: [String]
-    let values: [[Value]]
+    let values: [[InfluxValue]]
 }
 
-public enum Value: Codable {
+public enum InfluxValue: Codable {
     case double(Double)
     case string(String)
     
@@ -44,7 +44,7 @@ public enum Value: Codable {
             self = .string(x)
             return
         }
-        throw DecodingError.typeMismatch(Value.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Value"))
+        throw DecodingError.typeMismatch(InfluxValue.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Value"))
     }
     
     public func encode(to encoder: Encoder) throws {
