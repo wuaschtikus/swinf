@@ -1,0 +1,25 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Rainbow",
+        "repositoryURL": "https://github.com/onevcat/Rainbow",
+        "state": {
+          "branch": null,
+          "revision": "9c52c1952e9b2305d4507cf473392ac2d7c9b155",
+          "version": "3.1.5"
+        }
+      },
+      {
+        "package": "swift-net",
+        "repositoryURL": "https://github.com/wuaschtikus/swift-net.git",
+        "state": {
+          "branch": null,
+          "revision": "ec2e8b247914d98cfab8e3d8918121469b797992",
+          "version": "0.0.7"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
