@@ -8,12 +8,12 @@
 import Foundation
 
 // MARK: - InlfuxResult
-struct InfluxResult: Codable {
+public struct InfluxResult: Codable {
     let results: [Result]
 }
 
 // MARK: - Result
-struct Result: Codable {
+public struct Result: Codable {
     let statementID: Int
     let series: [Series]
     
@@ -24,17 +24,17 @@ struct Result: Codable {
 }
 
 // MARK: - Series
-struct Series: Codable {
+public struct Series: Codable {
     let name: String
     let columns: [String]
     let values: [[Value]]
 }
 
-enum Value: Codable {
+public enum Value: Codable {
     case double(Double)
     case string(String)
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode(Double.self) {
             self = .double(x)
@@ -47,7 +47,7 @@ enum Value: Codable {
         throw DecodingError.typeMismatch(Value.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Value"))
     }
     
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .double(let x):

@@ -8,7 +8,7 @@
 import Foundation
 import swift_net
 
-enum InfluxAPI {
+public enum InfluxAPI {
     case createDatabase(url: URL, name: String)
     case write(url: URL, dbName: String, measure: String)
     case query(url: URL, dbName: String, q: String)
@@ -16,7 +16,7 @@ enum InfluxAPI {
 
 extension InfluxAPI: TargetType {
     
-    var baseURL: URL {
+    public var baseURL: URL {
         switch self {
         case .createDatabase(let url, _): return url
         case .write(let url, _, _): return url
@@ -25,7 +25,7 @@ extension InfluxAPI: TargetType {
         }
     }
 
-    var path: String {
+    public var path: String {
         switch self {
         case .createDatabase: return "/query"
         case .write: return "/write"
@@ -33,14 +33,14 @@ extension InfluxAPI: TargetType {
         }
     }
     
-    var method: HTTPMethod {
+    public var method: HTTPMethod {
         switch self {
         case .write, .createDatabase: return .post
         case .query: return .get
         }
     }
 
-    var task: Task {
+    public var task: Task {
         switch self {
         case .createDatabase(_ , let name):
             return .requestParameters(parameters: ["q": "CREATE DATABASE \(name)"], encoding: URLEncoding.queryString)
@@ -52,11 +52,11 @@ extension InfluxAPI: TargetType {
         }
     }
     
-    var headers: [String: String]? {
+    public var headers: [String: String]? {
         return [:]
     }
     
-    var sampleData: Data {
+    public var sampleData: Data {
         switch self {
         case .write, .createDatabase, .query:
             return "{}".data(using: String.Encoding.utf8)!
